@@ -1,5 +1,6 @@
 package eclipselink;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Entity
 @NoSql(dataFormat=DataFormatType.MAPPED)
-public class Order {
+public class Order implements Serializable {
 
 	@Id 
     @GeneratedValue

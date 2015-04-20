@@ -16,64 +16,64 @@ import org.eclipse.persistence.nosql.annotations.DataFormatType;
 import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
-
 @Entity
-@NoSql(dataFormat=DataFormatType.MAPPED)
+@NoSql(dataFormat = DataFormatType.MAPPED)
 public class Order implements Serializable {
 
-	@Id 
+    @Id
     @GeneratedValue
-    @Field(name="_id")
-	private String id;
-	
-	@Temporal(TemporalType.DATE)
-	private Date date;
-	
-	@Column(name = "custInfo") private String customerInfo;
-	
-	@ElementCollection
-	private List<Item> items;	
-	
-	public Order() {
-		super();
-	}
-	
-	public Order(String customerInfo) {
-		super();
-		this.customerInfo = customerInfo;
-		this.date = new Date();
-	}
+    @Field(name = "_id")
+    private String id;
 
-	public String getId() {
-		return id;
-	}
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    @Column(name = "custInfo")
+    private String customerInfo;
 
-	public Date getDate() {
-		return date;
-	}
+    @ElementCollection
+    private List<Item> items;
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public Order() {
+        super();
+    }
 
-	public String getCustomerInfo() {
-		return customerInfo;
-	}
+    public Order(String customerInfo) {
+        super();
+        this.customerInfo = customerInfo;
+        this.date = new Date();
+    }
 
-	public void setCustomerInfo(String customerInfo) {
-		this.customerInfo = customerInfo;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public List<Item> getItems() {
-		return items;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}	
-	
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public void setCustomerInfo(String customerInfo) {
+        this.customerInfo = customerInfo;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
 }

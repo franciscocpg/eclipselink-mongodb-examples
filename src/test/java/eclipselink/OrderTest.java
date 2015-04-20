@@ -19,6 +19,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.mongodb.DB;
+import java.util.logging.Logger;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  * Tests for EclpiseLink for MongoDB.
@@ -36,6 +41,7 @@ public class OrderTest {
      */
     private EntityTransaction tx;
     private String id;
+    private static final Logger LOG = Logger.getLogger(OrderTest.class.getName());
 
     @BeforeClass
     public static void setUpPU() {
@@ -64,6 +70,7 @@ public class OrderTest {
         em.persist(order);
         em.flush();
         id = order.getId();
+        LOG.severe("id:" + id);
     }
 
     /**
@@ -105,6 +112,19 @@ public class OrderTest {
         Order order = (Order) em
                 .createNativeQuery("db.ORDER.findOne({_id: \"" + id + "\"})", Order.class)
                 .getSingleResult();
+
+        // then
+        assertOrder(order);
+    }
+
+    @Test
+    public void should_find_by_primary_with_criteria() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Order> cq = cb.createQuery(Order.class);
+        Root<Order> pet = cq.from(Order.class);
+        cq.select(pet);
+        TypedQuery<Order> q = em.createQuery(cq);
+        Order order = q.getSingleResult();
 
         // then
         assertOrder(order);
